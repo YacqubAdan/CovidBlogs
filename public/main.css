@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 
 .navbar {
@@ -140,8 +141,9 @@ section h1 {
 
 .login-container {
   background: #bb75dc;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
 }
@@ -159,6 +161,32 @@ section h1 {
   font-size: 30px;
   color: black;
   margin: 0 0 30px 0;
+}
+
+.login-main > form > input {
+  width: 90%;
+  padding: 15px;
+  background-color: #ccc;
+  color: gray;
+  border: 0;
+  margin: 10px 5px;
+  border-radius: 8px;
+}
+
+.login-main > form > button {
+  background-color: #bb75dc;
+  width: 90%;
+  padding: 15px;
+  border: none;
+  color: white;
+  margin-top: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-main > form > input:focus,
+.login-main > form > button:focus {
+  outline: none;
 }
 
 @media (max-width: 700px) {
