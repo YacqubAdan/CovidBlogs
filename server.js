@@ -3,6 +3,14 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const expressLayout = require("express-ejs-layouts");
+const passport = require("passport");
+const flash = require("express-flash");
+const session = require("express-session");
+//routers
+const aboutRouter = require("./routes/about");
+const registerRouter = require("./routes/register");
+const loginRouter = require("./routes/login");
+
 dotenv.config();
 //connecting to the database
 mongoose
@@ -21,7 +29,10 @@ app.use("images", express.static(__dirname + "public/images"));
 app.use(expressLayout);
 app.set("view engine", "ejs");
 
+app.use(express.urlencoded({ extended: false }));
+
 //navigation
+
 app.get("", (req, res) => {
   res.render("index");
 });
@@ -30,17 +41,11 @@ app.get("/home", (req, res) => {
   res.render("index");
 });
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+//routes
+app.use("/about", aboutRouter);
+app.use("/register", registerRouter);
+app.use("/login", loginRouter);
 
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
-});
 app.listen("5000", () => {
   console.log("Backend is running!");
 });
