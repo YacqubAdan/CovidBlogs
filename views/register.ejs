@@ -11,10 +11,32 @@
     <div class="login-container">
       <div class="login-main">
         <h1>REGISTER</h1>
+        <%- include ("./partials/messages") %>
         <form action="/register" method="POST">
-          <input type="username" name="username" placeholder="username" />
-          <input type="email" name="email" placeholder="email@gmail.com" />
-          <input type="password" name="password" placeholder="* * * * *" />
+          <input
+            required
+            type="username"
+            name="username"
+            placeholder="username"
+          />
+          <input
+            required
+            type="email"
+            name="email"
+            placeholder="email@gmail.com"
+          />
+          <input
+            required
+            type="password"
+            name="password"
+            placeholder="password"
+          />
+          <input
+            required
+            type="password"
+            name="password2"
+            placeholder="confirm password"
+          />
           <button>REGISTER</button>
         </form>
       </div>

@@ -3,9 +3,7 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const expressLayout = require("express-ejs-layouts");
-const passport = require("passport");
-const flash = require("express-flash");
-const session = require("express-session");
+
 //routers
 const aboutRouter = require("./routes/about");
 const registerRouter = require("./routes/register");
