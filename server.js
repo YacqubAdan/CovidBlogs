@@ -3,6 +3,12 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const expressLayout = require("express-ejs-layouts");
+const flash = require("express-flash");
+const session = require("express-session");
+const passport = require("passport");
+
+//Passport config
+require("./config/passport")(passport);
 
 //routers
 const aboutRouter = require("./routes/about");
@@ -24,13 +30,38 @@ app.use("/css", express.static(__dirname + "public/css"));
 app.use("/js", express.static(__dirname + "public/js"));
 app.use("images", express.static(__dirname + "public/images"));
 
+//  EJS
 app.use(expressLayout);
 app.set("view engine", "ejs");
 
+// Body Parser
 app.use(express.urlencoded({ extended: false }));
 
-//navigation
+// Express Session
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Connect Flash
+app.use(flash());
+
+//Global Vars
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  next();
+});
+
+//navigation
 app.get("", (req, res) => {
   res.render("index");
 });
