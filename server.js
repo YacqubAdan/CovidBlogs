@@ -14,6 +14,7 @@ require("./config/passport")(passport);
 const aboutRouter = require("./routes/about");
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
+const dashboardRouter = require("./routes/dashboard");
 
 dotenv.config();
 //connecting to the database
@@ -29,7 +30,7 @@ app.use(express.static("public"));
 app.use("/css", express.static(__dirname + "public/css"));
 app.use("/js", express.static(__dirname + "public/js"));
 app.use("images", express.static(__dirname + "public/images"));
-
+app.use("/dashboard", dashboardRouter);
 //  EJS
 app.use(expressLayout);
 app.set("view engine", "ejs");
@@ -68,6 +69,12 @@ app.get("", (req, res) => {
 
 app.get("/home", (req, res) => {
   res.render("index");
+});
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  req.flash("success_msg", "You are logged out");
+  res.redirect("login");
 });
 
 //routes
