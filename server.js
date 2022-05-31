@@ -6,6 +6,7 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
+const port = process.env.PORT || 5000;
 
 //Passport config
 require("./config/passport")(passport);
@@ -80,6 +81,6 @@ app.use("/login", loginRouter);
 app.use("/dashboard", dashboardRouter);
 
 //listen port
-app.listen("5000", () => {
+app.listen(port, () => {
   console.log("Backend is running!");
 });
