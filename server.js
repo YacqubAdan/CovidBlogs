@@ -2,16 +2,15 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const expressLayout = require("express-ejs-layouts");
-const flash = require("express-flash");
+const flash = require("connect-flash");
 const session = require("express-session");
 const passport = require("passport");
+const methodOverride = require("method-override");
 
 //Passport config
 require("./config/passport")(passport);
 
 //routers
-const aboutRouter = require("./routes/about");
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const dashboardRouter = require("./routes/dashboard");
@@ -30,14 +29,12 @@ app.use(express.static("public"));
 app.use("/css", express.static(__dirname + "public/css"));
 app.use("/js", express.static(__dirname + "public/js"));
 app.use("images", express.static(__dirname + "public/images"));
-app.use("/dashboard", dashboardRouter);
 //  EJS
-app.use(expressLayout);
 app.set("view engine", "ejs");
 
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
-
+app.use(methodOverride("_method"));
 // Express Session
 app.use(
   session({
@@ -78,10 +75,11 @@ app.get("/logout", (req, res) => {
 });
 
 //routes
-app.use("/about", aboutRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
+app.use("/dashboard", dashboardRouter);
 
+//listen port
 app.listen("5000", () => {
   console.log("Backend is running!");
 });
