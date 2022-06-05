@@ -3,7 +3,7 @@ Covid Blogs is a website that enables people to converse, share their experience
 
 **Link to project:** https://covid-community-blog.herokuapp.com/
 
-![alt text](http://url/to/img.png)
+![alt text](CovidBlogs.JPG)
 
 
 ## How It's Made:
