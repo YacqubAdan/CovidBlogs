@@ -7,7 +7,6 @@ const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
 const port = process.env.PORT || 5000;
-const uri = process.env.MONGODB_URI;
 
 //Passport config
 require("./config/passport")(passport);
@@ -20,7 +19,10 @@ const dashboardRouter = require("./routes/dashboard");
 dotenv.config();
 //connecting to the database
 mongoose
-  .connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
+  .connect(process.env.MONGO_URL, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
   .then(() => console.log("MongoDB connected!"))
   .catch((err) => console.log("Error:- " + err));
 
