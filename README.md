@@ -1,7 +1,7 @@
 # CovidBlogs
 Covid Blogs is a website that enables people to converse, share their experiences, and much more in the form of blogs.
 
-**Link to project:** https://covid-community-blog.herokuapp.com/
+**Link to project:** https://covid-blogs.onrender.com
 
 ![alt text](CovidBlogs.JPG)
 
